@@ -1,2 +1,3 @@
-# rock_paper_scissors
-Odin_Project
+# rock paper scissors - game
+
+### The Odin Project
