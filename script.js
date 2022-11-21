@@ -1,65 +1,65 @@
+const rockBtn = document.getElementById('rockBtn');
+const paperBtn = document.getElementById('paperBtn');
+const scissorsBtn = document.getElementById('scissorsBtn');
+const playerTurn = document.getElementById('player-img');
+const computerTurn = document.getElementById('computer-img');
+
+const imageSrc = {
+    rock: './assets/rock.svg',
+    paper: './assets/paper.svg',
+    scissors: './assets/scissors.svg'
+}
+
+
 
 function getComputerChoice() {
     const selectionWords = ["Rock", "Paper", "Scissors"];
     const randomChoice = Math.floor(Math.random() * 3);
-    return selectionWords[randomChoice];
+    return selectionWords[randomChoice].toLowerCase();
 }
 
 
+[rockBtn, paperBtn, scissorsBtn].forEach(item => {
+    item.addEventListener('click', e => {
+        playerTurn.classList.remove('show-img-player');
+        computerTurn.classList.remove('show-img-comp');
+        let playerSelection = e.target.id;
+        let computerSelection = getComputerChoice()
+        setTimeout(() => {
+            playRound(playerSelection, computerSelection)
+        }, 500);
 
-const playerSelection = prompt('Select word you want to battle this round?');
-const computerSelection = getComputerChoice();
+    })
+})
+
 
 function playRound(playerSelection, computerSelection) {
-    const rock = 'rock';
-    const paper = 'paper';
-    const scissors = 'scissors';
-    const playerTurn = playerSelection.toLowerCase();
-    const computerTurn = computerSelection.toLowerCase();
+    let playerScore = 0;
+    let computerScore = 0;
 
-    if (playerTurn === computerTurn) {
+    const playerChoice = playerSelection.toLowerCase();
+    const computerChoice = computerSelection.toLowerCase();
+
+    playerTurn.src = imageSrc[playerSelection];
+    computerTurn.src = imageSrc[computerSelection];
+    playerTurn.classList.add('show-img-player');
+    computerTurn.classList.add('show-img-comp');
+
+
+    if (playerChoice === computerChoice) {
         return `It's a draw, play more!`;
     }
 
-    if (playerTurn === rock && computerTurn === paper) {
-        return 'You lose, paper beats rock!';
-    } else if (playerTurn === rock && computerTurn === scissors) {
-        return 'You win, rock beats scissors!';
-    } else if (playerTurn === paper && computerTurn === rock) {
-        return 'You win, paper beats rock';
-    } else if (playerTurn === paper && computerTurn === scissors) {
-        return 'You lose, scissors beats paper';
-    } else if (playerTurn === scissors && computerTurn === rock) {
-        return 'You lose, rock beats scissors';
-    } else if (playerTurn === scissors && computerTurn === paper) {
-        return 'You win, scissors beats paper'
-    }
-
-}
-
-function game() {
-
-    let computerCounter = 0;
-    let playerCounter = 0;
-    for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt('Select word you want to battle this round?');
-        const computerSelection = getComputerChoice();
-        const round = playRound(playerSelection, computerSelection);
-        if (round.slice(0, 7) === 'You win') {
-            playerCounter += 1
-        } else {
-            computerCounter += 1
-        }
-    }
-    if (computerCounter === playerCounter) {
-        return `It's a draw, play more!`;
-    } else if (computerCounter > playerCounter) {
-        return `Computer win with score ${computerCounter}:${playerCounter}`
+    if ((playerChoice === 'rock' && computerChoice === 'paper') || (playerChoice === 'paper' && computerChoice === 'scissors') || (playerChoice === 'scissors' && computerChoice === 'rock')) {
+        computerScore++
+        return `You lose, ${computerChoice} beats ${playerChoice}!`;
     } else {
-        return `You win with score ${playerCounter}:${computerCounter}`;
+        playerScore++
+        return `You win, ${playerChoice} beats ${computerChoice}!`;
     }
 }
 
-// console.log(playRound(playerSelection, computerSelection))
 
-console.log(game())
+
+
+

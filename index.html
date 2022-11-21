@@ -6,9 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
+
+    <div class="container">
+        <header>
+            <h1 class="heading">Rock, Paper, Scissors</h1>
+            <p>Tap on hand to start playing</p>
+        </header>
+        <div class="btn-container">
+            <button class="player-btn" id="rockBtn"><img class="shadow-img" src="./assets/rock.svg" alt=""
+                     id="rock"></button>
+            <button class="player-btn" id="paperBtn"><img src="./assets/paper.svg" alt="" class="shadow-img"
+                     id="paper"></button>
+            <button class="player-btn" id="scissorsBtn"><img src="./assets/scissors.svg" alt="" class="shadow-img"
+                     id="scissors"></button>
+        </div>
+
+        <div class="game-container">
+            <div class="player-selection">
+                <img src="" alt="" id="player-img" class="player">
+            </div>
+            <div class="computer-selection">
+                <img src="" alt="" id="computer-img" class="comp">
+            </div>
+        </div>
+    </div>
     <script src="./script.js"></script>
 </body>
 
